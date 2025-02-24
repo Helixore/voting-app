@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,300&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat", serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+            color: #fff;
+        }
+        #chart .modebar{
+            display: none !important;
+        }
+        html{
+            height: 100vh;
+            width: 100%;
+        }
+        body{
+            height:100vh;
+            width:100%;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(239,133,79);
+            background: linear-gradient(90deg, rgba(239,133,79,1) 0%, rgba(9,9,121,1) 50%, rgba(16,122,176,1) 100%);
+        }
+        main{
+            width: 80%;
+        }
+        main h1{
+            text-align: center;
+        }
+        main p{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+    
+    <div id="chart-container">
+        <h1>Głosy na kandydatów</h1>
+        <p>Ilość oddanych głosów: {{ total_votes }}</p>
+        <div id="chart" class="chart"></div>
+    </div>
+    </main>
+    <script type="text/javascript">
+        var graphs = {{json | safe}}; //Error doesn't appear after launching the app
+        var layout = {
+                title: {
+                    text: ""
+                }, 
+            showlegend: false
+        };
+        var config = {
+            displayModeBar: false,
+            responsive: true
+        };
+        Plotly.newPlot('chart', graphs, layout, config);
+        window.addEventListener("resize", () => {
+            Plotly.relayout('chart', {
+                width: window.innerWidth * 0.8
+            })
+        })
+    </script>
+</body>
+</html>

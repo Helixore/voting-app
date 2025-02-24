@@ -1,0 +1,6 @@
+Flask>=2.2.5
+Flask-WTF>=1.1.1
+WTForms>=3.0.1
+numpy>=1.24.3
+pandas>=2.0.3
+plotly>=5.15.0
